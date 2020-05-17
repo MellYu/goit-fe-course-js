@@ -1,47 +1,27 @@
 let country = prompt(`Введите страну доставки!`);
-let cost = 100;
-let result = `Доставка в ${country} будет стоить ${cost} кредитов!`;
-let unCorrect = `В вашей стране доставка не доступна`;
+
 
 if (country === null) {
-  result = "Отменено пользователем!";
-  console.log(result);
+  console.log('Отменено пользователем!');
 } else {
   switch (country.toLowerCase()) {
     case "китай":
-      alert(result);
-      console.log(result);
+      console.log(`Доставка в Китай будет стоить 100 кредитов!`);
       break;
     case "чили":
-      cost = 250;
-      result = `Доставка в ${country} будет стоить ${cost} кредитов!`;
-      alert(result);
-      console.log(result);
+      console.log(`Доставка в Чили будет стоить 250 кредитов!`);
       break;
     case "австралия":
-      cost = 170;
-      result = `Доставка в ${country} будет стоить ${cost} кредитов!`;
-      alert(result);
-      console.log(result);
+      console.log(`Доставка в Австралия будет стоить 170 кредитов!`);
       break;
     case "индия":
-      cost = 80;
-      result = `Доставка в ${country} будет стоить ${cost} кредитов!`;
-      alert(result);
-      console.log(result);
+      console.log(`Доставка в Индия будет стоить 80 кредитов!`);
       break;
     case "ямайка":
-      cost = 120;
-      result = `Доставка в ${country} будет стоить ${cost} кредитов!`;
-      alert(result);
-      console.log(result);
+      console.log(`Доставка в Ямайка будет стоить 120 кредитов!`);
       break;
     default:
-      alert(unCorrect);
+      alert(`В вашей стране доставка не доступна`);
       break;
-    // case null:
-    //     result = ('Отменено пользователем!');
-    //     console.log(result);
-    //     break;
   }
 }
