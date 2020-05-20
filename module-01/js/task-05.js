@@ -1,4 +1,4 @@
-let country = prompt(`Введите страну доставки!`);
+const country = prompt(`Введите страну доставки!`);
 
 
 if (country === null) {

@@ -1,5 +1,5 @@
 let quantity = 100;
-let ordered = prompt(`Введите количетво товара`);
+const ordered = prompt(`Введите количетво товара`);
 
 if (ordered <= quantity){
     console.log(`Заказ оформлен, с вами свяжется менеджер`);
