@@ -10,7 +10,6 @@ do {
   }
   numbers.push(+input);
 } while (input !== null);
-console.log(numbers);
 for (const number of numbers) {
       total += number;
 }
