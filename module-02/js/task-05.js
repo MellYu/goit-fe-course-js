@@ -1,13 +1,7 @@
 const checkForSpam = function(message) {
   // твой код
   let string = message.toLowerCase();
-if(string.includes('sale')){
- return true;
-}
-if(string.includes('spam')){
- return true;
-}
-return false;
+  return string.includes('sale') || string.includes('spam');
 };
 
 /*
