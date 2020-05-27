@@ -1,11 +1,6 @@
 const formatString = function(string) {
     // твой код
-
-    if(string.length <= 40){
-     return string;
-    } else {
-      const limitedText = string.slice(0, 39) + '...';
-      return limitedText}
+    return string.lenght <= 40 ? string : `${string.slice(0,39)} ...`;
   };
   
   /*
