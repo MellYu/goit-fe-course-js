@@ -2,11 +2,11 @@ const findBestEmployee = function(employees) {
     // твой код
     let greaterEmployee;
     let maxValue = 0;
-    const keys = Object.keys(employees);
-    for (const key of keys){
-      if (maxValue < employees[key]){
-        maxValue = employees[key];
-        greaterEmployee = key;
+
+    for (const employee in employees){
+      if(maxValue < employees[employee]){
+        maxValue = employees[employee];
+        greaterEmployee = employee;
       }
     }
     return greaterEmployee;
