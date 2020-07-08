@@ -7,5 +7,3 @@ inputRef.addEventListener('input', event => {
         outputRef.textContent = 'незнакомец';
     }
   });
-
-  console.log(event.target.value);
