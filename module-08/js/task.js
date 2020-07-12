@@ -45,6 +45,7 @@ const galleryList = () => {
 
   const closeLightbox = () =>{
     refs.lightBoxRef.classList.remove('is-open');
+    refs.lightBoxImgRef.src = '';
   };
 
   const onPressEsc = (event) => {
