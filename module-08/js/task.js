@@ -1,64 +1,51 @@
 import images from "./gallery-items.js";
 
 const refs = {
-  galleryRef: document.querySelector('.js-gallery'),
-  lightBoxRef: document.querySelector('.lightbox'),
-  lightBoxImgRef: document.querySelector('.lightbox__image'),
-  lightBoxBtn: document.querySelector('button[data-action="close-lightbox]'),
+  galleryRef: document.querySelector(".js-gallery"),
+  lightBoxRef: document.querySelector(".lightbox"),
+  lightBoxImgRef: document.querySelector(".lightbox__image"),
+  lightBoxBtn: document.querySelector('.lightbox__button'),
 };
-const galleryList = () => {
-    const galleryArray = [];
-    const imageListItemRef = document.createElement('li');
-    const imageAdrRef = document.createElement('a');
-    const imageRef = document.createElement('img');
-    imageRef.classList.add('gallery__image');
-    imageAdrRef.classList.add('gallery__link')
-    imageListItemRef.classList.add('gallery__item');
-    imageAdrRef.appendChild(imageRef)
-    imageListItemRef.appendChild(imageAdrRef);
-    images.forEach(image =>{
-      imageAdrRef.href = image.original;
-      imageRef.src = image.preview;
-      imageRef.alt = image.description;
-      imageRef.dataset.source = image.original;
-      galleryArray.push(imageListItemRef.outerHTML);
-    })
-    return galleryArray.join('');
-  };
-  refs.galleryRef.insertAdjacentHTML('afterbegin', galleryList());
 
-  const openLightbox = (event) => {
-    event.preventDefault();
+const galleryElement = ({ preview, description, original }) => {
+  return `<li class="gallery__item">
+  <a class="gallery__link" href="${original}">
+  <img class="gallery__image" src="${preview}" data-source="${original}" alt="${description}"/>
+  </a>
+  </li>`};
 
-    if(event.target.nodeName !== 'IMG'){
-      return;
-    }
+const createGallery = () => images.reduce((acc, image) => acc + galleryElement(image), "");
+refs.galleryRef.insertAdjacentHTML("afterbegin", createGallery(images));
 
-    const target = event.target;
-    const imageSrc = target.dataset.source;
+const openLightbox = (event) => {
+  event.preventDefault();
 
-    refs.lightBoxRef.classList.add('is-open');
-    refs.lightBoxImgRef.src = imageSrc;
-  };
+  if (event.target.nodeName !== "IMG") {
+    return;
+  }
 
-  refs.galleryRef.addEventListener('click', openLightbox);
+  refs.lightBoxRef.classList.add("is-open");
+  refs.lightBoxImgRef.src = event.target.dataset.source;
+};
+refs.galleryRef.addEventListener('click', openLightbox)
 
-  const closeLightbox = () =>{
-    refs.lightBoxRef.classList.remove('is-open');
-    refs.lightBoxImgRef.src = '';
-  };
+const closeLightbox = () => {
+  refs.lightBoxRef.classList.remove("is-open");
+  refs.lightBoxImgRef.src = "";
+};
 
-  const onPressEsc = (event) => {
-    if(event.code === 'Escape'){
-      closeLightbox();
-    }
-  };
+const onPressEsc = (event) => {
+  if (event.code === "Escape") {
+    closeLightbox();
+  }
+};
 
-  const outOfImage = (event)=>{
-    if(event.code !== 'IMG'){
-      closeLightbox();
-    }
-  };
+const outOfImage = (event) => {
+  if (event.code !== "IMG") {
+    closeLightbox();
+  }
+};
 
-  window.addEventListener('keydown', onPressEsc);
-  refs.lightBoxRef.addEventListener('click', outOfImage);
+refs.lightBoxBtn.addEventListener('click', closeLightbox);
+window.addEventListener("keydown", onPressEsc);
+refs.lightBoxRef.addEventListener("click", outOfImage);
