@@ -41,7 +41,7 @@ const onPressEsc = (event) => {
 };
 
 const outOfImage = (event) => {
-  if (event.code !== "IMG") {
+  if (event.target.nodeName !== "IMG") {
     closeLightbox();
   }
 };
