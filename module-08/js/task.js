@@ -7,22 +7,21 @@ const refs = {
   lightBoxBtn: document.querySelector('.lightbox__button'),
 };
 
-const galleryElement = ({ preview, description, original }) => {
-  return `<li class="gallery__item">
+const createGalleryElement = ({ preview, description, original }) => {
+  const galleryItem = `<li class="gallery__item">
   <a class="gallery__link" href="${original}">
   <img class="gallery__image" src="${preview}" data-source="${original}" alt="${description}"/>
   </a>
-  </li>`};
+  </li>`;
+  return galleryItem };
 
-const createGallery = () => images.reduce((acc, image) => acc + galleryElement(image), "");
+const createGallery = () => images.reduce((acc, image) => acc + createGalleryElement(image), "");
 refs.galleryRef.insertAdjacentHTML("afterbegin", createGallery(images));
 
 const openLightbox = (event) => {
   event.preventDefault();
 
-  if (event.target.nodeName !== "IMG") {
-    return;
-  }
+  if (event.target.nodeName === "IMG") 
 
   refs.lightBoxRef.classList.add("is-open");
   refs.lightBoxImgRef.src = event.target.dataset.source;
