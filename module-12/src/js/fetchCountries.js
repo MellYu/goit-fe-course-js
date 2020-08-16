@@ -15,13 +15,11 @@ export default function fetchCountries(searchQuery){
 
 function showCountries(countries){
   const countriesListItem = countriesList(countries);
-  // console.log(countriesListItem);
   return refs.countriesListRef.insertAdjacentHTML('beforeend', countriesListItem);
 }
 
 function showAloneCountry(countries){
   const countryItem = aloneCountry(...countries);
-  // console.log(countryItem);
   return refs.countryContainerRef.insertAdjacentHTML('beforeend', countryItem);
 }
 
@@ -31,7 +29,6 @@ function checkingCountries(countries){
   }else if(countries.length > 1  && countries.length <= 10){
     showCountries(countries)
   }else {
-    // console.log('Put correct country name, please!');
     myError();
   }
 }
