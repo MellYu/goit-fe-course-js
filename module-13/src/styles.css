@@ -50,3 +50,7 @@ img{
 .material-icons:hover{
   color: blue;
 }
+
+.visibility-cl{
+  visibility: hidden;
+}

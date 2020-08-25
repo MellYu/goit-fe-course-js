@@ -1,30 +1,33 @@
 import './styles.css';
 import './js/load-more.js';
 import refs from './js/refs';
-import debounce from 'lodash.debounce';
-import getImages from './js/load-more.js';
+import createGallery from './js/load-more.js';
+import imageCard from './template/image-card.hbs';
 
-let page = 1;
-refs.inputRef.addEventListener(
-  'input',
-  debounce(e => {
-    e.preventDefault();
-    page = 1;
-    const search = e.target.value;
-    if (search.length != 0) {
-      getImages(search, page);
-      page += 1;
-
-      refs.loadBtnRef.addEventListener('click', () => {
-        getImages(search, page);
-        page += 1;
-        window.scrollTo({
-          top: document.body.clientHeight - 100,
-          behavior: 'smooth',
-        });
-      });
-    } else {
-      refs.galleryRef.innerHTML = '';
+refs.inputRef.addEventListener('submit', e => {
+  e.preventDefault();
+  createGallery.clearPage();
+  const searchValue = e.currentTarget.elements.query.value;
+  createGallery.getImage(searchValue).then(images => {
+    if (images.length !== 0) {
+      refs.loadBtnRef.classList.remove('visibility-cl');
+      return refs.galleryRef.insertAdjacentHTML('beforeend', imageCard(images));
     }
-  }, 500),
-);
+  });
+  createGallery.request = searchValue;
+});
+
+refs.loadBtnRef.addEventListener('click', e => {
+  e.preventDefault();
+  const searchValue = createGallery.request;
+  createGallery.pageUpdate();
+  createGallery.getImage(searchValue).then(images => {
+    if (images.length !== 0) {
+      return refs.galleryRef.insertAdjacentHTML('beforeend', imageCard(images));
+    }
+  });
+  window.scrollTo({
+    top: document.body.clientHeight - 100,
+    behavior: 'smooth',
+  });
+});
